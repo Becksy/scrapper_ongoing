@@ -1,4 +1,4 @@
-//test for new branch
+//test
 <!DOCTYPE html>
 <?php session_start(); ?>
 <html lang="ko">
