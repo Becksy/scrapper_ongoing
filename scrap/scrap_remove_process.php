@@ -1,0 +1,22 @@
+<?php
+session_start();
+require("DB/config.php");
+
+$conn = mysqli_connect($config["host"], $config["duser"], $config["dpw"]);
+mysqli_select_db($conn, $config["dname"]);
+
+$safe_id = mysqli_real_escape_string($conn, $_POST['target_remove_id']);
+$register = $_SESSION['nickname'];
+
+$query = "UPDATE `scraps` SET visible=0 WHERE id='".$safe_id."'";
+mysqli_query($conn, $query);
+$result__ = mysqli_query($conn,"SELECT * FROM scraps WHERE id='".$safe_id."'");
+$row = mysqli_fetch_assoc($result__);
+
+if($row != null){
+  echo json_encode($row);
+}else{echo json_encode("false");}
+
+
+mysqli_close($conn);
+?>
